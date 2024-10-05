@@ -1,0 +1,40 @@
+/* Custom styles for CV webpage */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #F6E8EA;
+}
+
+/* Стиль для заголовка */
+header {
+    background-color: #ef626c;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Section Titles */
+h2 {
+    border-bottom: 2px solid #ef626c;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* Skills Section Icons */
+.icon-size {
+    font-size: 2rem;
+    color: #d94a5a;
+}
+
+/* Container Spacing */
+.container {
+    max-width: 960px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 20px;
+    }
+}
