@@ -1,12 +1,13 @@
-const buttons = document.getElementsByClassName('xylo-button')
-for (var i = 0; i < buttons.length; i++) {
-    const button = buttons[i]
-    button.addEventListener('click', soundButtonDidTap)
-}
+const keys = document.querySelectorAll('.key');
 
-function soundButtonDidTap(event) {
-    let button = event.currentTarget // current tapped button
-    let soundName = button.getAttribute('data-sound') // get sound name from button attr 'data-sound'
-    const audio = new Audio(`Sounds/${soundName}.wav`)
-    audio.play()
+keys.forEach(key => {
+    key.addEventListener('click', () => {
+        const note = key.getAttribute('data-note');
+        playSound(note);
+    });
+});
+
+function playSound(note) {
+    const sound = new Audio(`sounds/${note}.wav`);
+    sound.play();
 }
