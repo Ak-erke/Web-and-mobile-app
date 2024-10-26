@@ -1,10 +1,3 @@
-const audio = document.getElementById('audio');
-const playPauseButton = document.getElementById('play-pause');
-const nextButton = document.getElementById('next');
-const cover = document.getElementById('cover');
-const trackNameDisplay = document.getElementById('track-name');
-const trackListElement = document.getElementById('track-list');
-
 const tracks = [
     { name: "The Weeknd - House of Balloons", url: "tracks/TheWeeknd_HouseOfBalloons.mp3", cover: "images/houseob.jfif" },
     { name: "JAEHYUN - Roses", url: "tracks/JAEHYUN - Roses.mp3", cover: "images/Roses.jfif" },
@@ -13,7 +6,13 @@ const tracks = [
 
 let curTrackIndex = 0;
 
-// Load the track and update the UI
+const audio = document.getElementById('audio');
+const playPauseButton = document.getElementById('play-pause');
+const nextButton = document.getElementById('next');
+const cover = document.getElementById('cover');
+const trackNameDisplay = document.getElementById('track-name');
+const trackListElement = document.getElementById('track-list');
+
 function loadTrack(index) {
     const track = tracks[index];
     audio.src = track.url;
@@ -21,15 +20,10 @@ function loadTrack(index) {
     trackNameDisplay.textContent = track.name;
 }
 
-// Toggle play/pause functionality
+// Play or pause 
 function togglePlayPause() {
-    if (audio.paused) {
-        audio.play();
-        playPauseButton.textContent = 'Pause';
-    } else {
-        audio.pause();
-        playPauseButton.textContent = 'Play';
-    }
+    audio.paused ? audio.play() : audio.pause();
+    playPauseButton.textContent = audio.paused ? 'Play' : 'Pause';
 }
 
 // Play the next track
@@ -40,26 +34,25 @@ function playNextTrack() {
     playPauseButton.textContent = 'Pause';
 }
 
-// Populate the track list dynamically
+function handleTrackSelection(index) {
+    curTrackIndex = index;
+    loadTrack(curTrackIndex);
+    audio.play();
+    playPauseButton.textContent = 'Pause';
+}
+
 function populateTrackList() {
     tracks.forEach((track, index) => {
         const trackItem = document.createElement('li');
         trackItem.textContent = track.name;
-        trackItem.addEventListener('click', () => {
-            curTrackIndex = index;
-            loadTrack(curTrackIndex);
-            audio.play();
-            playPauseButton.textContent = 'Pause';
-        });
+        trackItem.addEventListener('click', () => handleTrackSelection(index));
         trackListElement.appendChild(trackItem);
     });
 }
 
-// Event listeners for buttons
 playPauseButton.addEventListener('click', togglePlayPause);
 nextButton.addEventListener('click', playNextTrack);
 audio.addEventListener('ended', playNextTrack);
 
-// Initialize the app
 populateTrackList();
 loadTrack(curTrackIndex);
